@@ -8,16 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-/* TODO:
- - add sender and title to notes
- - add sender to comment
- - add new watcher name
- - set notification image to most recent users profile picture.
-
-*/
-
 //Either needs to run on a set tab or figure out how communicate between multiple instances of the script so that only one runs.
-
 
 var Settings = {
 	url : "https://www.furaffinity.net/submit/", //smallest page with notification bar I could find
@@ -107,7 +98,7 @@ notificationType = {
 					var option = {
 						icon : getAvatar(user)
 					};
-					notifier.createNotification(user + "commented on " + submission.innerText, option, submission.href);
+					notifier.createNotification(user + " commented on " + submission.innerText, option, submission.href);
 				}
 			});
 		} else {
