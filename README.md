@@ -5,6 +5,7 @@ User scripts written to improve functionality on Furaffinity. Currently existing
 scripts currently found in this repository
 
 * Notifier - Sends browser notifications for new messages such as comments, notes, and watches.
+* Search URL string - adds current search parameters to the address bar allowing one to bookmark or share a search and quickly jump pages.
 
 # Unavailable Scripts
 scripts of which I have written, but require fixes or refactoring before I share them.
@@ -13,11 +14,6 @@ scripts of which I have written, but require fixes or refactoring before I share
 Adds hotkeys to navigate furaffinity (favoriting, clearing current page of new submissions, etc.) 
 
 **status:** actually mostly works right now, need to fix page navigation on search page as well as gallery navigation on submission pages. I would also like to refactor to remove the use of eval because of my poor data structure for storing hotkeys and actions.
-
-## Search URL string
-adds to current search parameters to the address bar allowing one to bookmark or share a search and quickly jump pages.
-
-**status:** I think it's broken right now? I have to read all the form elements and make sense of what goes where, the html doesn't make that easy, so it's sensitive to small changes. I might be able to find a better approach perhaps using the html string instead of DOM. It'd be nice if I could just retrieve the form data for the search.
 
 ## Gallery Scraper
 Retrieves the submission image urls for the given pages of a gallery which can be fed into a download manager. Can also provide detailed metadata for submissions such as keywords, descriptions, and titles. 
