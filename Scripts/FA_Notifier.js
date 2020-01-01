@@ -65,7 +65,7 @@ var notifier = {
 };
 
 function getAvatar(user) { //user: string, returns users avatar image url
-	return "https://a.facdn.net/" + user.toLowerCase() + ".gif";
+	return "https://a.facdn.net/" + user.toLowerCase().replace(/_/g, "") + ".gif";
 }
 
 notificationType = {
