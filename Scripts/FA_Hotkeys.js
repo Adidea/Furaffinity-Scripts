@@ -13,14 +13,12 @@
 // @grant       none
 // ==/UserScript==
 
-//needs rewritten. The way functions are mapped to keys is just stupid. Wouldn't be hard to do it better.
-
 /*jshint esnext: true */
 var settingsOpen = false;
 var settingsMenu = null;
 var hotkeys = new Map();
 var storage = window.localStorage;
-var isResized = false; //for fit to screen - these globals are kind of bleh.
+var isResized = false; //for fit to screen
 var smallImage = ""; //small submission view
 var debugEnabled = false;
 
@@ -155,84 +153,37 @@ function fitToScreen() {
 
 function favorite() {
     if (windowUrlContains(/www.furaffinity.net\/(view|full)/)) {
-      var favButton = document.getElementsByClassName("button fav")[0];
+      var favButton = document.querySelector(".buttons .fav a");
         if (favButton) {
             favButton.click();
         }
       }
-      /* old favorite code
-      document.querySelector('a.p20r').click();
-      */
 }
 
 function navigateLeft() {
-    if (windowUrlContains(/www.furaffinity.net\/(view|full)/)) {
-        var center = document.getElementsByClassName("minigallery-title")[0];
-        previousElement(center).firstChild.firstChild.firstChild.click(); //Prone to breaking if structure changes
-    } else if (windowUrlContains(/www.furaffinity.net\/(gallery|scraps|favorites)/)) {
-        var url = window.location.href;
-        var reg = /(favorites|gallery|scraps)(\/.+\/)([^/]+)(\/$|$)/;
-        var pageNum = url.match(reg);
-        pageNum = pageNum === null ? 2 : pageNum[3];
-        pageNum = pageNum > 1 ? pageNum : 2;
-        var nextPage = url.replace(reg, "$1$2" + (pageNum - 1) + "$4");
-        window.location.href = nextPage;
-    } else if (windowUrlContains(/www.furaffinity.net\/browse/)) {
-        var url = window.location.href;
-        var reg = /(browse\/)(\d+)(?=\/$|$)/;
-        var pageNum = url.match(reg);
-        pageNum = pageNum === null ? 2 : pageNum[2];
-        pageNum = pageNum > 1 ? pageNum : 2;
-        var nextPage = url.replace(reg, "$1" + (pageNum - 1));
-        window.location.href = nextPage;
+    let nextButton = document.querySelector(".button.standard[value=Back]");
+    if (nextButton) {
+        nextButton.click();
     }
 }
 
 function navigateRight() {
-    if (windowUrlContains(/www.furaffinity.net\/(view|full)/)) {
-        var center = document.getElementsByClassName("minigallery-title")[0];
-        nextElement(center).firstChild.firstChild.firstChild.click();
-    } else if (windowUrlContains(/www.furaffinity.net\/(gallery|scraps|favorites)/)) {
-        var url = window.location.href;
-        var reg = /(favorites|gallery|scraps)(\/.+\/)([^/]+)(\/$|$)/;
-        var pageNum = url.match(reg);
-        var nextPage;
-        if (pageNum === null) {
-            //console.log(pageNum);
-            nextPage = url + "2/";
-        } else {
-            //console.log(pageNum);
-            nextPage = url.replace(reg, "$1$2" + (+pageNum[3] + 1) + "$4");
-        }
-        window.location.href = nextPage;
-    } else if (windowUrlContains(/www.furaffinity.net\/browse/)) {
-        console.log("TEST");
-        var url = window.location.href;
-        var reg = /(browse\/)(\d+)(?=\/$|$)/;
-        var pageNum = url.match(reg);
-        console.log(pageNum);
-        var nextPage;
-        if (pageNum === null) {
-            //console.log(pageNum);
-            nextPage = url + "2/";
-        } else {
-            //console.log(pageNum);
-            nextPage = url.replace(reg, "$1" + (+pageNum[2] + 1));
-        }
-        window.location.href = nextPage;
+    let nextButton = document.querySelector(".button.standard[value=Next]");
+    if (nextButton) {
+        nextButton.click();
     }
 }
 
 function checkAll() {
-    var button = document.getElementsByClassName("section-button invert-selection")[0];
-    if (button !== undefined) {
+    var button = document.querySelector(".section-options .check-uncheck");
+    if (button) {
         button.click();
     }
 }
 
 function removeChecked() {
-    var button = document.getElementsByClassName("section-button remove-checked")[0];
-    if (button !== undefined) {
+    var button = document.querySelector(".section-options .remove-checked");
+    if (button) {
         button.click();
     }
 }
